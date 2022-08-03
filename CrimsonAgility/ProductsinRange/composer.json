@@ -1,0 +1,22 @@
+{
+    "name": "crimsonagility/module-productsinrange",
+    "description": "Customer account section to return a list of products based on a range of prices entered.",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Michael Stripling",
+            "email": "mastrip2@hotmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "CrimsonAgility\\ProductsinRange\\": ""
+        }
+    }
+}

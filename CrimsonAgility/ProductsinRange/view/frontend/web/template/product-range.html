@@ -1,0 +1,123 @@
+<div class="p-range-wrapper" data-block="p-range">
+    <div class="block-content">
+        <form data-role="save"
+              data-bind="submit:save"
+              method="post">
+
+            <!-- ko if: errorMessage -->
+            <div class="alert-notification">
+                <div class="alert-notification-inner">
+                    <div>
+                        <strong data-bind="i18n: 'Alert'"></strong>
+                        <p data-bind="i18n: errorMessage"></p>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+
+            <div class="fieldset"
+                      data-bind="attr: {'data-hasrequired': $t('* Required Fields')}">
+                <div class="field field-low required">
+                    <label class="label" for="low"><span data-bind="i18n: 'Low'"></span></label>
+                    <div class="control">
+                        <input type="number"
+                               class="input-text"
+                               id="low"
+                               name="low"
+                               data-bind="value: low, event: { change: fieldCheck }"
+                               data-validate="{required:true, integer:true}"
+                               min="0"
+                               maxlength="10"
+                               autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="field field-high required">
+                    <label for="high" class="label"><span data-bind="i18n: 'High'"></span></label>
+                    <div class="control">
+                        <input type="number"
+                               class="input-text"
+                               id="high"
+                               name="high"
+                               data-bind="value: high, event: { change: fieldCheck }"
+                               data-validate="{required:true, integer:true}"
+                               min="1"
+                               maxlength="10"
+                               autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="field field-sort required">
+                    <label for="sort" class="label"><span data-bind="i18n: 'Price Sort'"></span></label>
+                    <select id="sort" name="sort">
+                        <option value="ASC">Ascending</option>
+                        <option value="DESC">Descending</option>
+                    </select>
+                </div>
+
+                <div class="field field-limit required">
+                    <label for="limit" class="label"><span data-bind="i18n: 'Show'"></span></label>
+                    <select id="limit" name="limit">
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="10">20</option>
+                      <option value="15">30</option>
+                      <option value="10">50</option>
+                      <option value="15">70</option>
+                      <option value="10">90</option>
+                      <option value="15">100</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <button type="submit" class="action action-save secondary"><span data-bind="i18n: 'Search'"></span></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- ko if: prodCount() > 0 -->
+    <table>
+        <thead>
+            <th data-bind="i18n: 'Thumbnail'"></th>
+            <th data-bind="i18n: 'SKU'"></th>
+            <th data-bind="i18n: 'Name'"></th>
+            <th data-bind="i18n: 'QTY'"></th>
+            <th data-bind="i18n: 'availability'"></th>
+            <th data-bind="i18n: 'Price'"></th>
+            <th data-bind="i18n: 'Action'"></th>
+        </thead>
+        <tbody data-bind="foreach: getProducts()">
+            <tr>
+                <td>
+                    <img class="thumbnail" data-bind="attr:{src: thumbnail}">
+                </td>
+                <td>
+                    <span data-bind="text: sku"></span>
+                </td>
+                <td>
+                    <span data-bind="text: name"></span>
+                </td>
+                <td>
+                    <span data-bind="text: qty"></span>
+                </td>
+                <td>
+                    <span data-bind="text: in_stock ? 'In Stock' : 'Out of Stock', css: { inStock: in_stock }"></span>
+                </td>
+                <td>
+                    <span data-bind="text: price"></span>
+                </td>
+                <td class="action">
+                    <a target="_blank" data-bind="attr: { href: productUrl }">Details</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- /ko -->
+
+    <!-- ko if: !prodCount() > 0 -->
+    <div>
+        There are no products to display. Please refine your search.
+    </div>
+    <!-- /ko -->
+</div>
